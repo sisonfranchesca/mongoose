@@ -10,11 +10,19 @@ const personSchema = new mongoose.Schema({
   favoriteFoods: [String]
 });
 
-
 let Person = mongoose.model('Person', personSchema);
 
 const createAndSavePerson = (done) => {
-  done(null /*, data*/);
+  const person = new Person({
+    name: "John Doe",
+    age: 25,
+    favoriteFoods: ["Pizza", "Tacos"]
+  });
+
+  person.save((err, data) => {
+    if (err) return done(err);
+    done(null, data);
+  });
 };
 
 const createManyPeople = (arrayOfPeople, done) => {
@@ -60,10 +68,6 @@ const queryChain = (done) => {
 
   done(null /*, data*/);
 };
-
-/** **Well Done !!**
-/* You completed these challenges, let's go celebrate !
- */
 
 //----- **DO NOT EDIT BELOW THIS LINE** ----------------------------------
 
